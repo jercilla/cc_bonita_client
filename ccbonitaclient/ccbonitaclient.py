@@ -131,15 +131,19 @@ def complete_task(process_name, entity_id, task_name, params=None):
 def _get_session():
     global _session
     if not _session:
-        _session = _login()
+        _set_session(_login())
 
     return _session
+
+
+def _set_session(session):
+    global _session
+    _session = session
 
 
 def _refresh_session():
-    _session = _login()
-    return _session
-
+    global _session
+    _set_session(_login())
 
 def _login(user=None, passwd=None):
     if not user:
